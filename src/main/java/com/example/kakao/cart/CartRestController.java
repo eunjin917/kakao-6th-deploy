@@ -47,25 +47,7 @@ public class CartRestController {
         CartResponse.FindAllDTO responseDTO = cartService.findAll(userDetails.getUser());
         return ResponseEntity.ok(ApiUtils.success(responseDTO));
     }
-//    @GetMapping("/carts/v2")
-//    public ResponseEntity<?> findAllv2(@AuthenticationPrincipal CustomUserDetails userDetails) {
-//        CartResponse.FindAllDTOv2 responseDTO = cartService.findAllv2(userDetails.getUser());
-//        return ResponseEntity.ok(ApiUtils.success(responseDTO));
-//    }
 
-
-    /**
-     *  [
-     *      {
-     *          "cartId":1,
-     *          "quantity":10
-     *      },
-     *      {
-     *          "cartId":2,
-     *          "quantity":10
-     *      }
-     *  ]
-     */
     // (기능8) 주문하기 - (주문화면에서 장바구니 수정하기)
     // /carts/updaate
     @PostMapping("/carts/update")
