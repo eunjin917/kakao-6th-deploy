@@ -17,13 +17,6 @@ public class UserRestController {
 
     private final UserService userService;
 
-    // (기능3) 이메일 중복체크
-    @PostMapping("/check")
-    public ResponseEntity<?> check(@RequestBody @Valid UserRequest.EmailCheckDTO emailCheckDTO, Errors errors) {
-        userService.sameCheckEmail(emailCheckDTO.getEmail());
-        return ResponseEntity.ok(ApiUtils.success(null));
-    }
-
     // (기능4) 회원가입
     @PostMapping("/join")
     public ResponseEntity<?> join(@RequestBody @Valid UserRequest.JoinDTO requestDTO, Errors errors) {
