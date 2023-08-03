@@ -9,37 +9,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CartResponse {
-
-    @Getter
-    @Setter
-    public static class FindAllDTOv2 {
-        private List<ProductDTO> products;
-
-        public FindAllDTOv2(List<Cart> cartList) {
-            this.products = cartList.stream().map(cart -> new ProductDTO(cart)).collect(Collectors.toList());
-        }
-
-        @Getter
-        @Setter
-        public class ProductDTO {
-            private int productId;
-            private String productName;
-            private int cartId;
-            private String optionName;
-            private int quantity;
-            private int price;
-
-            public ProductDTO(Cart cart) {
-                this.productId = cart.getOption().getProduct().getId();
-                this.productName = cart.getOption().getProduct().getProductName();
-                this.cartId = cart.getId();
-                this.optionName = cart.getOption().getOptionName();
-                this.quantity = cart.getQuantity();
-                this.price = cart.getPrice();
-            }
-        }
-    }
-
     @Getter
     @Setter
     public static class FindAllDTO {
@@ -49,7 +18,7 @@ public class CartResponse {
         public FindAllDTO(List<Cart> cartList) {
             this.products = cartList.stream()
                     // 중복되는 상품 걸러내기
-                    .map(cart -> cart.getOption().getProduct()).distinct()
+                    .map(cart -> cart.getOption().getProduct()).distinct()  // 중복 제거
                     .map(product -> new ProductDTO(product, cartList)).collect(Collectors.toList());
             this.totalPrice = cartList.stream().mapToInt(cart -> cart.getOption().getPrice() * cart.getQuantity()).sum();
         }
