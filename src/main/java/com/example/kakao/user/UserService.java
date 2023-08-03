@@ -19,13 +19,17 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
+    public void sameCheckEmail(String email) {
+        Optional<User> userOP = userJPARepository.findByEmail(email);
+        if (userOP.isPresent()) {
+            throw new Exception400("동일한 이메일이 존재합니다 : " + email);
+        }
+    }
+
     @Transactional
     public void join(UserRequest.JoinDTO requestDTO) {
         // 이미 가입된 이메일 확인
-        Optional<User> userOP = userJPARepository.findByEmail(requestDTO.getEmail());
-        if (userOP.isPresent()) {
-            throw new Exception400("동일한 이메일이 존재합니다 : " + requestDTO.getEmail());
-        }
+        sameCheckEmail(requestDTO.getEmail());
         // 비밀번호 암호화
         requestDTO.setPassword(passwordEncoder.encode(requestDTO.getPassword()));
         // 회원가입
