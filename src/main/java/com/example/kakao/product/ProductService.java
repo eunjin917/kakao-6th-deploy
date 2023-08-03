@@ -13,30 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Transactional(readOnly = true)
-@RequiredArgsConstructor
-@Service
+@Transactional(readOnly = true) // readOnly 시, 변경 감지를 하지 않는다 (더티체킹 등 X)
+@RequiredArgsConstructor    // Dependency Injection (의존성 주입)
+@Service    // IoC컴포넌트에 등록해야함
 public class ProductService {
     private final ProductJPARepository productRepository;
     private final OptionJPARepository optionRepository;
-
-    public ProductResponse.FindByIdDTOv2 findByIdv2(int id) {
-        List<Option> optionListPS = optionRepository.findByProductIdJoinProduct(id);
-        if(optionListPS.size() == 0){
-            throw new Exception404("해당 상품을 찾을 수 없습니다 : "+id);
-        }
-        return new ProductResponse.FindByIdDTOv2(optionListPS);
-    }
-
-    public ProductResponse.FindByIdDTO findById(int id) {
-        Product productPS = productRepository.findById(id).orElseThrow(
-                () -> new Exception404("해당 상품을 찾을 수 없습니다 : "+id)
-        );
-        List<Option> optionListPS = optionRepository.findByProductId(productPS.getId());
-        return new ProductResponse.FindByIdDTO(productPS, optionListPS);
-    }
-
-
 
     public List<ProductResponse.FindAllDTO> findAll(int page) {
         // 1. 페이지 객체 만들기
@@ -44,6 +26,11 @@ public class ProductService {
 
         // 2. DB 조회하기
         Page<Product> pageContent = productRepository.findAll(pageable);
+
+        // 예외처리
+        if (pageContent.isEmpty()) {
+            throw new Exception404("존재하지 않는 페이지입니다 : "+page);
+        }
 
         // 3. DTO 만들기
         // 페이지 객체의 content는 List이다.
@@ -55,4 +42,13 @@ public class ProductService {
                 .collect(Collectors.toList());
         return responseDTOs;
     }
+
+    public ProductResponse.FindByIdDTO findById(int id) {
+        Product productPS = productRepository.findById(id).orElseThrow(
+                () -> new Exception404("해당 상품을 찾을 수 없습니다 : "+id)
+        );
+        List<Option> optionListPS = optionRepository.findByProductId(productPS.getId());
+        return new ProductResponse.FindByIdDTO(productPS, optionListPS);
+    }
+
 }

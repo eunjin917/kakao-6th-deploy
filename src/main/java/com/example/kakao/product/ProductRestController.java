@@ -14,15 +14,14 @@ import java.util.List;
 @RestController
 public class ProductRestController {
 
-    private final ProductService productService;
+    private final ProductService productService;    // 의존시키기
 
     // (기능1) 전체 상품 목록 조회 (페이징 9개씩)
     // /products
     @GetMapping("/products")
     public ResponseEntity<?> findAll(@RequestParam(value = "page", defaultValue = "0") Integer page) {
         List<ProductResponse.FindAllDTO> responseDTOs = productService.findAll(page);
-        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTOs);
-        return ResponseEntity.ok(apiResult);
+        return ResponseEntity.ok().body(ApiUtils.success(responseDTOs));
     }
 
     // (기능2) 개별 상품 상세 조회
@@ -34,12 +33,4 @@ public class ProductRestController {
         return ResponseEntity.ok(apiResult);
     }
 
-    // (기능2) 개별 상품 상세 조회 v2
-    // /products/{id}/v2
-    @GetMapping("/products/{id}/v2")
-    public ResponseEntity<?> findByIdv2(@PathVariable int id) {
-        ProductResponse.FindByIdDTOv2 responseDTO = productService.findByIdv2(id);
-        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(responseDTO);
-        return ResponseEntity.ok(apiResult);
-    }
 }
