@@ -87,7 +87,3 @@ INSERT INTO item_tb (`id`,`option_id`, `quantity`, `price`, `order_id`) VALUES (
 INSERT INTO cart_tb (`id`,`user_id`, `option_id`, `quantity`, `price`) VALUES ('1', '2', '5', '3', '10000');
 INSERT INTO cart_tb (`id`,`user_id`, `option_id`, `quantity`, `price`) VALUES ('2', '2', '10', '4', '10000');
 INSERT INTO cart_tb (`id`,`user_id`, `option_id`, `quantity`, `price`) VALUES ('3', '2', '11', '5', '10000');
-
-
-
-
