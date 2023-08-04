@@ -3,6 +3,7 @@ package com.example.kakao.user;
 
 import com.example.kakao.MyRestDoc;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -30,6 +31,7 @@ public class UserRestControllerTest extends MyRestDoc {
     private ObjectMapper om;
 
     @Test
+    @DisplayName("이메일 중복 확인 성공")
     public void sameCheckEmail_test() throws Exception {
         // given
         UserRequest.EmailCheckDTO requestDTO = new UserRequest.EmailCheckDTO();
@@ -64,6 +66,7 @@ public class UserRestControllerTest extends MyRestDoc {
     }
 
     @Test
+    @DisplayName("이메일 Pattern Validation 실패")
     public void sameCheckEmail_emailPatternValidationFail_test() throws Exception {
         // given
         UserRequest.EmailCheckDTO requestDTO = new UserRequest.EmailCheckDTO();
@@ -98,6 +101,7 @@ public class UserRestControllerTest extends MyRestDoc {
     }
 
     @Test
+    @DisplayName("이미 가입된 이메일이면 실패")
     public void sameCheckEmail_isPresent_test() throws Exception {
         // given
         UserRequest.EmailCheckDTO requestDTO = new UserRequest.EmailCheckDTO();
@@ -132,6 +136,7 @@ public class UserRestControllerTest extends MyRestDoc {
     }
 
     @Test
+    @DisplayName("회원가입 성공")
     public void join_test() throws Exception {
         // given
         UserRequest.JoinDTO requestDTO = new UserRequest.JoinDTO();
@@ -168,6 +173,7 @@ public class UserRestControllerTest extends MyRestDoc {
     }
 
     @Test
+    @DisplayName("이메일 Pattern Validation 실패")
     public void join_emailPatternValidationFail_test() throws Exception {
         // given
         UserRequest.JoinDTO requestDTO = new UserRequest.JoinDTO();
@@ -204,6 +210,7 @@ public class UserRestControllerTest extends MyRestDoc {
     }
 
     @Test
+    @DisplayName("비밀번호 Size Validation 실패")
     public void join_passwordSizeValidationFail_test() throws Exception {
         // given
         UserRequest.JoinDTO requestDTO = new UserRequest.JoinDTO();
@@ -240,6 +247,7 @@ public class UserRestControllerTest extends MyRestDoc {
     }
 
     @Test
+    @DisplayName("비밀번호 Pattern Validation 실패")
     public void join_passwordPatternValidationFail_test() throws Exception {
         // given
         UserRequest.JoinDTO requestDTO = new UserRequest.JoinDTO();
@@ -276,6 +284,7 @@ public class UserRestControllerTest extends MyRestDoc {
     }
 
     @Test
+    @DisplayName("이름 Size Validation 실패")
     public void join_usernameSizeValidationFail_test() throws Exception {
         // given
         UserRequest.JoinDTO requestDTO = new UserRequest.JoinDTO();
@@ -312,6 +321,7 @@ public class UserRestControllerTest extends MyRestDoc {
     }
 
     @Test
+    @DisplayName("이미 가입된 이메일이면 실패")
     public void join_isPresent_test() throws Exception {
         // given
         UserRequest.JoinDTO requestDTO = new UserRequest.JoinDTO();
@@ -348,6 +358,7 @@ public class UserRestControllerTest extends MyRestDoc {
     }
 
     @Test
+    @DisplayName("로그인 성공")
     public void login_test() throws Exception {
         // given
         UserRequest.LoginDTO requestDTO = new UserRequest.LoginDTO();
@@ -383,6 +394,7 @@ public class UserRestControllerTest extends MyRestDoc {
     }
 
     @Test
+    @DisplayName("이메일 Pattern Validation 실패")
     public void login_emailPatternValidationFail_test() throws Exception {
         // given
         UserRequest.LoginDTO requestDTO = new UserRequest.LoginDTO();
@@ -418,6 +430,7 @@ public class UserRestControllerTest extends MyRestDoc {
     }
 
     @Test
+    @DisplayName("비밀번호 Size Validation 실패")
     public void login_passwordSizeValidationFail_test() throws Exception {
         // given
         UserRequest.LoginDTO requestDTO = new UserRequest.LoginDTO();
@@ -453,6 +466,7 @@ public class UserRestControllerTest extends MyRestDoc {
     }
 
     @Test
+    @DisplayName("비밀번호 Pattern Validation 실패")
     public void login_passwordPatternValidationFail_test() throws Exception {
         // given
         UserRequest.LoginDTO requestDTO = new UserRequest.LoginDTO();
@@ -488,6 +502,7 @@ public class UserRestControllerTest extends MyRestDoc {
     }
 
     @Test
+    @DisplayName("존재하지 않는 이메일이면 실패")
     public void login_notFound_test() throws Exception {
         // given
         UserRequest.LoginDTO requestDTO = new UserRequest.LoginDTO();
@@ -523,6 +538,7 @@ public class UserRestControllerTest extends MyRestDoc {
     }
 
     @Test
+    @DisplayName("비밀번호가 일치하지 않으면 실패")
     public void login_notMatch_test() throws Exception {
         // given
         UserRequest.LoginDTO requestDTO = new UserRequest.LoginDTO();
