@@ -148,6 +148,7 @@ include::{snippets}/{user}/login_not-match_test/response-body.adoc[]
 === [상품 전체 조회]
 
 ==== 상품 전체 조회 성공
+* param : page={number}
 * param의 디폴트 값은 0이다.
 
 ===== 요청 예시
@@ -159,6 +160,7 @@ include::{snippets}/{product}/find-all_test/response-body.adoc[]
 === [상품 상세 조회]
 
 ==== 상품 상세 조회 성공
+* path variable : 상품아이디
 
 ===== 요청 예시
 include::{snippets}/{product}/find-by-id_test/http-request.adoc[]
@@ -213,6 +215,7 @@ include::{snippets}/{cart}/add-cart-list_not-found_test/response-body.adoc[]
 === [장바구니 조회]
 
 ==== 장바구니 조회 성공
+* 장바구니에 상품이 없을 경우, front-end에서 에러처리한다.
 
 ===== 요청 예시
 include::{snippets}/{cart}/find-all_test/http-request.adoc[]
@@ -261,6 +264,7 @@ include::{snippets}/{cart}/update_not-found_test/response-body.adoc[]
 === [주문 저장]
 
 ==== 주문 저장 성공
+* 장바구니에 담긴 장바구니아이템을 그대로 주문아이템으로 넘겨와 저장하고, 장바구니는 비워진다.
 
 ===== 요청 예시
 include::{snippets}/{order}/save_test/http-request.adoc[]
@@ -279,6 +283,7 @@ include::{snippets}/{order}/save_is-empty_test/response-body.adoc[]
 === [주문 조회]
 
 ==== 주문 조회 성공
+* path variable : 주문아이디
 
 ===== 요청 예시
 include::{snippets}/{order}/find-by-id_test/http-request.adoc[]
