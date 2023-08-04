@@ -243,29 +243,6 @@ public class CartRestControllerTest extends MyRestDoc {
         resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
 
-    @WithUserDetails(value = "another@nate.com")
-    @Test
-    public void findAll_isEmpty_test() throws Exception {
-        // given
-
-        // when
-        ResultActions resultActions = mvc.perform(
-                get("/carts")
-        );
-
-        // eye
-        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
-        System.out.println("===============responseBody 시작===============");
-        System.out.println(getPrettyString(responseBody));
-        System.out.println("===============responseBody 종료===============");
-
-        // then
-        resultActions.andExpect(status().isNotFound()); // 404
-
-        // API
-        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
-    }
-
     @WithUserDetails(value = "ssarmango@nate.com")
     @Test
     public void update_test() throws Exception {

@@ -66,13 +66,8 @@ public class CartService {
 
     public CartResponse.FindAllDTO findAll(User user) {
         // 1. 장바구니 조회
-        List<Cart> cartListPS = cartJPARepository.mFindAllByUserIdOrderByOptionIdAsc(user.getId());   // 쿼리문O - 조인 Option, Product
+        List<Cart> cartListPS = cartJPARepository.mFindAllByUserIdOrderByOptionIdAsc(user.getId());   // 쿼리문O
         // Cart에 담긴 옵션이 3개이면, 2개는 바나나 상품, 1개는 딸기 상품이면 Product는 2개인 것이다.
-
-        // 2. 장바구니가 비어있으면 예외처리
-        if (cartListPS.isEmpty()) {
-            throw new Exception404("장바구니가 비어있습니다");
-        }
 
         return new CartResponse.FindAllDTO(cartListPS);
     }
