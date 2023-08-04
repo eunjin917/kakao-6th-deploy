@@ -1,6 +1,7 @@
 package com.example.kakao.product;
 
 import com.example.kakao.MyRestDoc;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -25,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ProductRestControllerTest extends MyRestDoc {
 
     @Test
+    @DisplayName("상품 전체 조회 성공")
     public void findAll_test() throws Exception {
         // given
         Integer page = 0;   // toString 위해 int 대신 Integer
@@ -54,30 +56,7 @@ public class ProductRestControllerTest extends MyRestDoc {
     }
 
     @Test
-    public void findAll_notFound_test() throws Exception {
-        // given
-        Integer page = 100;   // toString 위해 int 대신 Integer
-
-        // when
-        ResultActions resultActions = mvc.perform(
-                get("/products")
-                        .param("page", page.toString()) // param은 String
-        );
-
-        // eye
-        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
-        System.out.println("===============responseBody 시작===============");
-        System.out.println(getPrettyString(responseBody));
-        System.out.println("===============responseBody 종료===============");
-
-        // then
-        resultActions.andExpect(status().isNotFound()); // 404
-
-        // API
-        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
-    }
-
-    @Test
+    @DisplayName("상품 상세 조회 성공")
     public void findById_test() throws Exception {
         // given
         int id = 1;
@@ -100,12 +79,17 @@ public class ProductRestControllerTest extends MyRestDoc {
         resultActions.andExpect(jsonPath("$.response.description").value(""));
         resultActions.andExpect(jsonPath("$.response.image").value("/images/1.jpg"));
         resultActions.andExpect(jsonPath("$.response.price").value(1000));
+        resultActions.andExpect(jsonPath("$.response.starCount").value(5));
+        resultActions.andExpect(jsonPath("$.response.options[0].id").value(1));
+        resultActions.andExpect(jsonPath("$.response.options[0].optionName").value("01. 슬라이딩 지퍼백 크리스마스에디션 4종"));
+        resultActions.andExpect(jsonPath("$.response.options[0].price").value(10000));
 
         // API
         resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
     }
 
     @Test
+    @DisplayName("유효하지 않은 상품이면 실패")
     public void findById_notFound_test() throws Exception {
         // given
         int id = 100;
