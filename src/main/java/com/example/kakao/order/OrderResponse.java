@@ -22,7 +22,8 @@ public class OrderResponse {
             this.products = itemList.stream()
                     // 중복되는 상품 걸러내기
                     .map(item -> item.getOption().getProduct()).distinct()  // 중복 제거
-                    .map(product -> new ProductDTO(product, itemList)).collect(Collectors.toList());
+                    .map(product -> new ProductDTO(product, itemList))
+                    .collect(Collectors.toList());
             this.totalPrice = itemList.stream().mapToInt(cart -> cart.getOption().getPrice() * cart.getQuantity()).sum();
         }
 
@@ -71,7 +72,8 @@ public class OrderResponse {
             this.products = itemList.stream()
                     // 중복되는 상품 걸러내기
                     .map(item -> item.getOption().getProduct()).distinct()  // 중복 제거
-                    .map(product -> new ProductDTO(product, itemList)).collect(Collectors.toList());
+                    .map(product -> new ProductDTO(product, itemList))
+                    .collect(Collectors.toList());
             this.totalPrice = itemList.stream().mapToInt(cart -> cart.getOption().getPrice() * cart.getQuantity()).sum();
         }
 

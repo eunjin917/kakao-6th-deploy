@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -19,8 +20,7 @@ public class OrderRestController {
 
     private final OrderService orderService;
 
-
-    // (기능9) 결재하기 - (주문 인서트) POST
+    // (기능9) 결제하기 - (주문 인서트) POST
     // /orders/save
     @PostMapping("/orders/save")
     public ResponseEntity<?> save(@AuthenticationPrincipal CustomUserDetails userDetails) {
@@ -31,7 +31,7 @@ public class OrderRestController {
     // (기능10) 주문 결과 확인 GET
     // /orders/{id}
     @GetMapping("/orders/{id}")
-    public ResponseEntity<?> findById(@PathVariable int id, @AuthenticationPrincipal CustomUserDetails userDetails) {
+    public ResponseEntity<?> findById(@PathVariable @Min(1) int id, @AuthenticationPrincipal CustomUserDetails userDetails) {
         OrderResponse.FindByIdDTO responseDTO = orderService.findById(id, userDetails.getUser());
         return ResponseEntity.ok().body(ApiUtils.success(responseDTO));
     }

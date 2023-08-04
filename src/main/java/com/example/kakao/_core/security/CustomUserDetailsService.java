@@ -22,11 +22,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<User> userOP = userJPARepository.findByEmail(email);
 
-        if (userOP.isEmpty()) {
+        if (userOP.isEmpty())
             return null;
-        } else {
-            User userPS = userOP.get();
-            return new CustomUserDetails(userPS);
-        }
+
+        User userPS = userOP.get();
+        return new CustomUserDetails(userPS);
     }
 }

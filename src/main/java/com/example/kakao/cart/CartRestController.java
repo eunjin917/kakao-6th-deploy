@@ -20,18 +20,6 @@ public class CartRestController {
 
     private final CartService cartService;
 
-    /**
-     * [
-     * {
-     * "optionId":1,
-     * "quantity":5
-     * },
-     * {
-     * "optionId":2,
-     * "quantity":5
-     * }
-     * ]
-     */
     // (기능6) 장바구니 담기 POST
     // /carts/add
     @PostMapping("/carts/add")
