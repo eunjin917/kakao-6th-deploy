@@ -148,7 +148,6 @@ include::{snippets}/{user}/login_not-match_test/response-body.adoc[]
 === [상품 전체 조회]
 
 ==== 상품 전체 조회 성공
-* param : page={number}
 * param의 디폴트 값은 0이다.
 
 ===== 요청 예시

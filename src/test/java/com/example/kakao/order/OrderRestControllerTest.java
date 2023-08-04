@@ -1,6 +1,7 @@
 package com.example.kakao.order;
 
 import com.example.kakao.MyRestDoc;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -26,6 +27,7 @@ public class OrderRestControllerTest extends MyRestDoc {
 
     @WithUserDetails(value = "ssarmango@nate.com")
     @Test
+    @DisplayName("주문 저장 성공")
     public void save_test() throws Exception {
         // given
 
@@ -42,6 +44,13 @@ public class OrderRestControllerTest extends MyRestDoc {
 
         // then
         resultActions.andExpect(jsonPath("$.success").value("true"));
+        resultActions.andExpect(jsonPath("$.response.id").value(1));
+        resultActions.andExpect(jsonPath("$.response.products[0].productName").value("기본에 슬라이딩 지퍼백 크리스마스/플라워에디션 에디션 외 주방용품 특가전"));
+        resultActions.andExpect(jsonPath("$.response.products[0].items[0].id").value(4));
+        resultActions.andExpect(jsonPath("$.response.products[0].items[0].optionName").value("01. 슬라이딩 지퍼백 크리스마스에디션 4종"));
+        resultActions.andExpect(jsonPath("$.response.products[0].items[0].quantity").value(5));
+        resultActions.andExpect(jsonPath("$.response.products[0].items[0].price").value(50000));
+        resultActions.andExpect(jsonPath("$.response.totalPrice").value(310900));
 
         // API
         resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
@@ -49,6 +58,7 @@ public class OrderRestControllerTest extends MyRestDoc {
 
     @WithUserDetails(value = "another@nate.com")
     @Test
+    @DisplayName("장바구니가 비어있으면 실패")
     public void save_isEmpty_test() throws Exception {
         // given
 
@@ -72,6 +82,7 @@ public class OrderRestControllerTest extends MyRestDoc {
 
     @WithUserDetails(value = "ssarmango@nate.com")
     @Test
+    @DisplayName("주문 조회 성공")
     public void findById_test() throws Exception {
         // given
         int id = 1;
@@ -89,6 +100,13 @@ public class OrderRestControllerTest extends MyRestDoc {
 
         // then
         resultActions.andExpect(jsonPath("$.success").value("true"));
+        resultActions.andExpect(jsonPath("$.response.id").value(1));
+        resultActions.andExpect(jsonPath("$.response.products[0].productName").value("기본에 슬라이딩 지퍼백 크리스마스/플라워에디션 에디션 외 주방용품 특가전"));
+        resultActions.andExpect(jsonPath("$.response.products[0].items[0].id").value(1));
+        resultActions.andExpect(jsonPath("$.response.products[0].items[0].optionName").value("01. 슬라이딩 지퍼백 크리스마스에디션 4종"));
+        resultActions.andExpect(jsonPath("$.response.products[0].items[0].quantity").value(5));
+        resultActions.andExpect(jsonPath("$.response.products[0].items[0].price").value(50000));
+        resultActions.andExpect(jsonPath("$.response.totalPrice").value(310900));
 
         // API
         resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
@@ -96,6 +114,7 @@ public class OrderRestControllerTest extends MyRestDoc {
 
     @WithUserDetails(value = "ssarmango@nate.com")
     @Test
+    @DisplayName("유효하지 않은 주문이면 실패")
     public void findById_notFound_test() throws Exception {
         // given
         int id = 100;
@@ -120,6 +139,7 @@ public class OrderRestControllerTest extends MyRestDoc {
 
     @WithUserDetails(value = "another@nate.com")
     @Test
+    @DisplayName("해당 유저의 주문이 아니라면 실패")
     public void findById_forBidden_test() throws Exception {
         // given
         int id = 1;
