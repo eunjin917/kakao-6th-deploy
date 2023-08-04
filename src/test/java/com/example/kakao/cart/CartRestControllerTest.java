@@ -251,6 +251,7 @@ public class CartRestControllerTest extends MyRestDoc {
 
     @WithUserDetails(value = "ssarmango@nate.com")
     @Test
+    @DisplayName("장바구니 수정 성공")
     public void update_test() throws Exception {
         // given
         List<CartRequest.UpdateDTO> requestDTOs = new ArrayList<>();
@@ -293,6 +294,7 @@ public class CartRestControllerTest extends MyRestDoc {
         resultActions.andExpect(jsonPath("$.response.carts[0].optionName").value("01. 슬라이딩 지퍼백 크리스마스에디션 4종"));
         resultActions.andExpect(jsonPath("$.response.carts[0].quantity").value(10));
         resultActions.andExpect(jsonPath("$.response.carts[0].price").value(100000));
+        resultActions.andExpect(jsonPath("$.response.totalPrice").value(459000));
 
         // API
         resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
@@ -300,6 +302,7 @@ public class CartRestControllerTest extends MyRestDoc {
 
     @WithUserDetails(value = "ssarmango@nate.com")
     @Test
+    @DisplayName("동일한 장바구니아이템을 요청하면 실패")
     public void update_badRequest_test() throws Exception {
         // given
         List<CartRequest.UpdateDTO> requestDTOs = new ArrayList<>();
@@ -344,6 +347,7 @@ public class CartRestControllerTest extends MyRestDoc {
 
     @WithUserDetails(value = "another@nate.com")
     @Test
+    @DisplayName("장바구니가 비어있으면 실패")
     public void update_isEmpty_test() throws Exception {
         // given
         List<CartRequest.UpdateDTO> requestDTOs = new ArrayList<>();
@@ -388,6 +392,7 @@ public class CartRestControllerTest extends MyRestDoc {
 
     @WithUserDetails(value = "ssarmango@nate.com")
     @Test
+    @DisplayName("유효하지 않은 장박구니아이템이면 실패")
     public void update_notFound_test() throws Exception {
         // given
         List<CartRequest.UpdateDTO> requestDTOs = new ArrayList<>();
