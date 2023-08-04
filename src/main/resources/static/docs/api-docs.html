@@ -861,9 +861,43 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect3">
-<h4 id="_존재하지_않는_이메일이면_실패">존재하지 않는 이메일이면 실패</h4>
+<h4 id="_비밀번호_pattern_validation_실패_2">비밀번호 Pattern Validation 실패</h4>
 <div class="sect4">
 <h5 id="_요청_예시_13">요청 예시</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /login HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 66
+Host: localhost:8080
+
+{
+  "email" : "ssarmango@nate.com",
+  "password" : "metameta"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_응답_예시_13">응답 예시</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code>{
+  "success" : false,
+  "response" : null,
+  "error" : {
+    "message" : "영문, 숫자, 특수문자가 포함되어야하고 공백이 포함될 수 없습니다.:password",
+    "status" : 400
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_존재하지_않는_이메일이면_실패">존재하지 않는 이메일이면 실패</h4>
+<div class="sect4">
+<h5 id="_요청_예시_14">요청 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /login HTTP/1.1
@@ -879,7 +913,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect4">
-<h5 id="_응답_예시_13">응답 예시</h5>
+<h5 id="_응답_예시_14">응답 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
@@ -897,7 +931,7 @@ Host: localhost:8080
 <div class="sect3">
 <h4 id="_비밀번호가_일치하지_않으면_실패">비밀번호가 일치하지 않으면 실패</h4>
 <div class="sect4">
-<h5 id="_요청_예시_14">요청 예시</h5>
+<h5 id="_요청_예시_15">요청 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /login HTTP/1.1
@@ -913,7 +947,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect4">
-<h5 id="_응답_예시_14">응답 예시</h5>
+<h5 id="_응답_예시_15">응답 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
@@ -949,7 +983,7 @@ Host: localhost:8080
 </ul>
 </div>
 <div class="sect4">
-<h5 id="_요청_예시_15">요청 예시</h5>
+<h5 id="_요청_예시_16">요청 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /products?page=0 HTTP/1.1
@@ -958,7 +992,7 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_응답_예시_15">응답 예시</h5>
+<h5 id="_응답_예시_16">응답 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
@@ -1027,27 +1061,15 @@ Host: localhost:8080</code></pre>
 <div class="sect3">
 <h4 id="_유효하지_않은_페이지이면_실패">유효하지 않은 페이지이면 실패</h4>
 <div class="sect4">
-<h5 id="_요청_예시_16">요청 예시</h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /products?page=100 HTTP/1.1
-Host: localhost:8080</code></pre>
-</div>
+<h5 id="_요청_예시_17">요청 예시</h5>
+<div class="paragraph">
+<p>Unresolved directive in api-docs.adoc - include::./build/generated-snippets/product-rest-controller-test/find-all_not-found_test/http-request.adoc[]</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_응답_예시_16">응답 예시</h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code>{
-  "success" : false,
-  "response" : null,
-  "error" : {
-    "message" : "존재하지 않는 페이지입니다 : 100",
-    "status" : 404
-  }
-}</code></pre>
-</div>
+<h5 id="_응답_예시_17">응답 예시</h5>
+<div class="paragraph">
+<p>Unresolved directive in api-docs.adoc - include::./build/generated-snippets/product-rest-controller-test/find-all_not-found_test/response-body.adoc[]</p>
 </div>
 </div>
 </div>
@@ -1057,7 +1079,7 @@ Host: localhost:8080</code></pre>
 <div class="sect3">
 <h4 id="_상품_상세_조회_성공">상품 상세 조회 성공</h4>
 <div class="sect4">
-<h5 id="_요청_예시_17">요청 예시</h5>
+<h5 id="_요청_예시_18">요청 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /products/1 HTTP/1.1
@@ -1066,7 +1088,7 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_응답_예시_17">응답 예시</h5>
+<h5 id="_응답_예시_18">응답 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
@@ -1109,7 +1131,7 @@ Host: localhost:8080</code></pre>
 <div class="sect3">
 <h4 id="_유효하지_않은_상품이면_실패">유효하지 않은 상품이면 실패</h4>
 <div class="sect4">
-<h5 id="_요청_예시_18">요청 예시</h5>
+<h5 id="_요청_예시_19">요청 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /products/100 HTTP/1.1
@@ -1118,7 +1140,7 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_응답_예시_18">응답 예시</h5>
+<h5 id="_응답_예시_19">응답 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
@@ -1144,7 +1166,7 @@ Host: localhost:8080</code></pre>
 <div class="sect3">
 <h4 id="_장바구니_담기_성공">장바구니 담기 성공</h4>
 <div class="sect4">
-<h5 id="_요청_예시_19">요청 예시</h5>
+<h5 id="_요청_예시_20">요청 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /carts/add HTTP/1.1
@@ -1163,7 +1185,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect4">
-<h5 id="_응답_예시_19">응답 예시</h5>
+<h5 id="_응답_예시_20">응답 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
@@ -1178,7 +1200,7 @@ Host: localhost:8080
 <div class="sect3">
 <h4 id="_이미_추가한_옵션이면_수량_수정_성공">이미 추가한 옵션이면 수량 수정 성공</h4>
 <div class="sect4">
-<h5 id="_요청_예시_20">요청 예시</h5>
+<h5 id="_요청_예시_21">요청 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /carts/add HTTP/1.1
@@ -1197,7 +1219,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect4">
-<h5 id="_응답_예시_20">응답 예시</h5>
+<h5 id="_응답_예시_21">응답 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
@@ -1212,7 +1234,7 @@ Host: localhost:8080
 <div class="sect3">
 <h4 id="_동일한_옵션을_요청하면_실패">동일한 옵션을 요청하면 실패</h4>
 <div class="sect4">
-<h5 id="_요청_예시_21">요청 예시</h5>
+<h5 id="_요청_예시_22">요청 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /carts/add HTTP/1.1
@@ -1231,7 +1253,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect4">
-<h5 id="_응답_예시_21">응답 예시</h5>
+<h5 id="_응답_예시_22">응답 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
@@ -1249,7 +1271,7 @@ Host: localhost:8080
 <div class="sect3">
 <h4 id="_유효하지_않은_옵션이면_실패">유효하지 않은 옵션이면 실패</h4>
 <div class="sect4">
-<h5 id="_요청_예시_22">요청 예시</h5>
+<h5 id="_요청_예시_23">요청 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /carts/add HTTP/1.1
@@ -1268,7 +1290,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect4">
-<h5 id="_응답_예시_22">응답 예시</h5>
+<h5 id="_응답_예시_23">응답 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
@@ -1289,7 +1311,7 @@ Host: localhost:8080
 <div class="sect3">
 <h4 id="_장바구니_조회_성공">장바구니 조회 성공</h4>
 <div class="sect4">
-<h5 id="_요청_예시_23">요청 예시</h5>
+<h5 id="_요청_예시_24">요청 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /carts HTTP/1.1
@@ -1298,7 +1320,7 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_응답_예시_23">응답 예시</h5>
+<h5 id="_응답_예시_24">응답 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
@@ -1364,7 +1386,7 @@ Host: localhost:8080</code></pre>
 </ul>
 </div>
 <div class="sect4">
-<h5 id="_요청_예시_24">요청 예시</h5>
+<h5 id="_요청_예시_25">요청 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /carts/update HTTP/1.1
@@ -1383,7 +1405,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect4">
-<h5 id="_응답_예시_24">응답 예시</h5>
+<h5 id="_응답_예시_25">응답 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
@@ -1419,7 +1441,7 @@ Host: localhost:8080
 <div class="sect3">
 <h4 id="_동일한_장바구니아이템을_요청하면_실패">동일한 장바구니아이템을 요청하면 실패</h4>
 <div class="sect4">
-<h5 id="_요청_예시_25">요청 예시</h5>
+<h5 id="_요청_예시_26">요청 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /carts/update HTTP/1.1
@@ -1438,7 +1460,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect4">
-<h5 id="_응답_예시_25">응답 예시</h5>
+<h5 id="_응답_예시_26">응답 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
@@ -1456,7 +1478,7 @@ Host: localhost:8080
 <div class="sect3">
 <h4 id="_장바구니가_비어있으면_실패">장바구니가 비어있으면 실패</h4>
 <div class="sect4">
-<h5 id="_요청_예시_26">요청 예시</h5>
+<h5 id="_요청_예시_27">요청 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /carts/update HTTP/1.1
@@ -1475,7 +1497,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect4">
-<h5 id="_응답_예시_26">응답 예시</h5>
+<h5 id="_응답_예시_27">응답 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
@@ -1493,7 +1515,7 @@ Host: localhost:8080
 <div class="sect3">
 <h4 id="_유효하지_않은_장바구니아이템이면_실패">유효하지 않은 장바구니아이템이면 실패</h4>
 <div class="sect4">
-<h5 id="_요청_예시_27">요청 예시</h5>
+<h5 id="_요청_예시_28">요청 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /carts/update HTTP/1.1
@@ -1512,7 +1534,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect4">
-<h5 id="_응답_예시_27">응답 예시</h5>
+<h5 id="_응답_예시_28">응답 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
@@ -1538,7 +1560,7 @@ Host: localhost:8080
 <div class="sect3">
 <h4 id="_주문_저장_성공">주문 저장 성공</h4>
 <div class="sect4">
-<h5 id="_요청_예시_28">요청 예시</h5>
+<h5 id="_요청_예시_29">요청 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /orders/save HTTP/1.1
@@ -1547,7 +1569,7 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_응답_예시_28">응답 예시</h5>
+<h5 id="_응답_예시_29">응답 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
@@ -1587,7 +1609,7 @@ Host: localhost:8080</code></pre>
 <div class="sect3">
 <h4 id="_장바구니가_비어있으면_실패_2">장바구니가 비어있으면 실패</h4>
 <div class="sect4">
-<h5 id="_요청_예시_29">요청 예시</h5>
+<h5 id="_요청_예시_30">요청 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /orders/save HTTP/1.1
@@ -1596,7 +1618,7 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_응답_예시_29">응답 예시</h5>
+<h5 id="_응답_예시_30">응답 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
@@ -1617,7 +1639,7 @@ Host: localhost:8080</code></pre>
 <div class="sect3">
 <h4 id="_주문_조회_성공">주문 조회 성공</h4>
 <div class="sect4">
-<h5 id="_요청_예시_30">요청 예시</h5>
+<h5 id="_요청_예시_31">요청 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /orders/1 HTTP/1.1
@@ -1626,7 +1648,7 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_응답_예시_30">응답 예시</h5>
+<h5 id="_응답_예시_31">응답 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
@@ -1666,7 +1688,7 @@ Host: localhost:8080</code></pre>
 <div class="sect3">
 <h4 id="_유효하지_않은_주문이면_실패">유효하지 않은 주문이면 실패</h4>
 <div class="sect4">
-<h5 id="_요청_예시_31">요청 예시</h5>
+<h5 id="_요청_예시_32">요청 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /orders/100 HTTP/1.1
@@ -1675,7 +1697,7 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_응답_예시_31">응답 예시</h5>
+<h5 id="_응답_예시_32">응답 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
@@ -1693,7 +1715,7 @@ Host: localhost:8080</code></pre>
 <div class="sect3">
 <h4 id="_해당_유저의_주문이_아니라면_실패">해당 유저의 주문이 아니라면 실패</h4>
 <div class="sect4">
-<h5 id="_요청_예시_32">요청 예시</h5>
+<h5 id="_요청_예시_33">요청 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /orders/1 HTTP/1.1
@@ -1702,7 +1724,7 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_응답_예시_32">응답 예시</h5>
+<h5 id="_응답_예시_33">응답 예시</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
@@ -1724,7 +1746,7 @@ Host: localhost:8080</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2023-08-04 12:46:49 +0900
+Last updated 2023-08-04 15:25:21 +0900
 </div>
 </div>
 </body>

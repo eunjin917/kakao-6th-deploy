@@ -3,6 +3,7 @@ package com.example.kakao.cart;
 import com.example.kakao.MyRestDoc;
 import com.example.kakao.cart.CartRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -37,6 +38,7 @@ public class CartRestControllerTest extends MyRestDoc {
 
     @WithUserDetails(value = "ssarmango@nate.com")
     @Test
+    @DisplayName("장바구니 담기 성공")
     public void addCartList_test() throws Exception {
         // given
         List<CartRequest.SaveDTO> requestDTOs = new ArrayList<>();
@@ -81,6 +83,7 @@ public class CartRestControllerTest extends MyRestDoc {
 
     @WithUserDetails(value = "ssarmango@nate.com")
     @Test
+    @DisplayName("이미 추가한 옵션이면 수량 수정 성공")
     public void addCartList_quantityUpdate_test() throws Exception {
         // given
         List<CartRequest.SaveDTO> requestDTOs = new ArrayList<>();
@@ -125,6 +128,7 @@ public class CartRestControllerTest extends MyRestDoc {
 
     @WithUserDetails(value = "ssarmango@nate.com")
     @Test
+    @DisplayName("동일한 옵션을 요청하면 실패")
     public void addCartList_badRequest_test() throws Exception {
         // given
         List<CartRequest.SaveDTO> requestDTOs = new ArrayList<>();
@@ -169,6 +173,7 @@ public class CartRestControllerTest extends MyRestDoc {
 
     @WithUserDetails(value = "ssarmango@nate.com")
     @Test
+    @DisplayName("유효하지 않은 옵션이면 실패")
     public void addCartList_notFound_test() throws Exception {
         // given
         List<CartRequest.SaveDTO> requestDTOs = new ArrayList<>();
@@ -213,6 +218,7 @@ public class CartRestControllerTest extends MyRestDoc {
 
     @WithUserDetails(value = "ssarmango@nate.com")
     @Test
+    @DisplayName("장바구니 조회 성공")
     public void findAll_test() throws Exception {
         // given
 
