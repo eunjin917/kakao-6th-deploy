@@ -55,7 +55,6 @@ public class OrderService {
         return new OrderResponse.SaveDTO(itemListPS);
     }
 
-    @Transactional
     public OrderResponse.FindByIdDTO findById(int id, User user) {
         // 1. 유효하지 않은 주문이면 예외처리
         Order orderPS = orderJPARepository.findById(id).orElseThrow(    // 쿼리문O
