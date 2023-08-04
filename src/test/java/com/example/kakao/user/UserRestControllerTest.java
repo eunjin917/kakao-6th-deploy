@@ -30,6 +30,108 @@ public class UserRestControllerTest extends MyRestDoc {
     private ObjectMapper om;
 
     @Test
+    public void sameCheckEmail_test() throws Exception {
+        // given
+        UserRequest.EmailCheckDTO requestDTO = new UserRequest.EmailCheckDTO();
+        requestDTO.setEmail("addnewuser@nate.com");
+
+        // json 변환
+        String requestBody = om.writeValueAsString(requestDTO);
+
+        // eye
+        System.out.println("===============requestBody 시작===============");
+        System.out.println(getPrettyString(requestBody));
+        System.out.println("===============requestBody 종료===============");
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                post("/check")
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        // eye
+        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        System.out.println("===============responseBody 시작===============");
+        System.out.println(getPrettyString(responseBody));
+        System.out.println("===============responseBody 종료===============");
+
+        // then
+        resultActions.andExpect(jsonPath("$.success").value("true"));
+
+        // API
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
+    }
+
+    @Test
+    public void sameCheckEmail_emailPatternValidationFail_test() throws Exception {
+        // given
+        UserRequest.EmailCheckDTO requestDTO = new UserRequest.EmailCheckDTO();
+        requestDTO.setEmail("addnewuser");
+
+        // json 변환
+        String requestBody = om.writeValueAsString(requestDTO);
+
+        // eye
+        System.out.println("===============requestBody 시작===============");
+        System.out.println(getPrettyString(requestBody));
+        System.out.println("===============requestBody 종료===============");
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                post("/check")
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        // eye
+        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        System.out.println("===============responseBody 시작===============");
+        System.out.println(getPrettyString(responseBody));
+        System.out.println("===============responseBody 종료===============");
+
+        // then
+        resultActions.andExpect(status().isBadRequest()); // 400
+
+        // API
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
+    }
+
+    @Test
+    public void sameCheckEmail_isPresent_test() throws Exception {
+        // given
+        UserRequest.EmailCheckDTO requestDTO = new UserRequest.EmailCheckDTO();
+        requestDTO.setEmail("ssarmango@nate.com");
+
+        // json 변환
+        String requestBody = om.writeValueAsString(requestDTO);
+
+        // eye
+        System.out.println("===============requestBody 시작===============");
+        System.out.println(getPrettyString(requestBody));
+        System.out.println("===============requestBody 종료===============");
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                post("/check")
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        // eye
+        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        System.out.println("===============responseBody 시작===============");
+        System.out.println(getPrettyString(responseBody));
+        System.out.println("===============responseBody 종료===============");
+
+        // then
+        resultActions.andExpect(status().isBadRequest()); // 400
+
+        // API
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
+    }
+
+    @Test
     public void join_test() throws Exception {
         // given
         UserRequest.JoinDTO requestDTO = new UserRequest.JoinDTO();
@@ -60,6 +162,150 @@ public class UserRestControllerTest extends MyRestDoc {
 
         // then
         resultActions.andExpect(jsonPath("$.success").value("true"));
+
+        // API
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
+    }
+
+    @Test
+    public void join_emailPatternValidationFail_test() throws Exception {
+        // given
+        UserRequest.JoinDTO requestDTO = new UserRequest.JoinDTO();
+        requestDTO.setEmail("addnewuser");
+        requestDTO.setPassword("meta1234!");
+        requestDTO.setUsername("addnewuser");
+
+        // json 변환
+        String requestBody = om.writeValueAsString(requestDTO);
+
+        // eye
+        System.out.println("===============requestBody zff시작===============");
+        System.out.println(getPrettyString(requestBody));
+        System.out.println("===============requestBody 종료===============");
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                post("/join")
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        // eye
+        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        System.out.println("===============responseBody 시작===============");
+        System.out.println(getPrettyString(responseBody));
+        System.out.println("===============responseBody 종료===============");
+
+        // then
+        resultActions.andExpect(status().isBadRequest()); // 400
+
+        // API
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
+    }
+
+    @Test
+    public void join_passwordSizeValidationFail_test() throws Exception {
+        // given
+        UserRequest.JoinDTO requestDTO = new UserRequest.JoinDTO();
+        requestDTO.setEmail("addnewuser@nate.com");
+        requestDTO.setPassword("meta1!");
+        requestDTO.setUsername("addnewuser");
+
+        // json 변환
+        String requestBody = om.writeValueAsString(requestDTO);
+
+        // eye
+        System.out.println("===============requestBody 시작===============");
+        System.out.println(getPrettyString(requestBody));
+        System.out.println("===============requestBody 종료===============");
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                post("/join")
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        // eye
+        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        System.out.println("===============responseBody 시작===============");
+        System.out.println(getPrettyString(responseBody));
+        System.out.println("===============responseBody 종료===============");
+
+        // then
+        resultActions.andExpect(status().isBadRequest()); // 400
+
+        // API
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
+    }
+
+    @Test
+    public void join_passwordPatternValidationFail_test() throws Exception {
+        // given
+        UserRequest.JoinDTO requestDTO = new UserRequest.JoinDTO();
+        requestDTO.setEmail("addnewuser@nate.com");
+        requestDTO.setPassword("metameta");
+        requestDTO.setUsername("addnewuser");
+
+        // json 변환
+        String requestBody = om.writeValueAsString(requestDTO);
+
+        // eye
+        System.out.println("===============requestBody 시작===============");
+        System.out.println(getPrettyString(requestBody));
+        System.out.println("===============requestBody 종료===============");
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                post("/join")
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        // eye
+        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        System.out.println("===============responseBody 시작===============");
+        System.out.println(getPrettyString(responseBody));
+        System.out.println("===============responseBody 종료===============");
+
+        // then
+        resultActions.andExpect(status().isBadRequest()); // 400
+
+        // API
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
+    }
+
+    @Test
+    public void join_usernameSizeValidationFail_test() throws Exception {
+        // given
+        UserRequest.JoinDTO requestDTO = new UserRequest.JoinDTO();
+        requestDTO.setEmail("addnewuser@nate.com");
+        requestDTO.setPassword("meta1234!");
+        requestDTO.setUsername("new");
+
+        // json 변환
+        String requestBody = om.writeValueAsString(requestDTO);
+
+        // eye
+        System.out.println("===============requestBody 시작===============");
+        System.out.println(getPrettyString(requestBody));
+        System.out.println("===============requestBody 종료===============");
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                post("/join")
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        // eye
+        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        System.out.println("===============responseBody 시작===============");
+        System.out.println(getPrettyString(responseBody));
+        System.out.println("===============responseBody 종료===============");
+
+        // then
+        resultActions.andExpect(status().isBadRequest()); // 400
 
         // API
         resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
@@ -131,6 +377,111 @@ public class UserRestControllerTest extends MyRestDoc {
 
         // then
         resultActions.andExpect(jsonPath("$.success").value("true"));
+
+        // API
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
+    }
+
+    @Test
+    public void login_emailPatternValidationFail_test() throws Exception {
+        // given
+        UserRequest.LoginDTO requestDTO = new UserRequest.LoginDTO();
+        requestDTO.setEmail("ssarmango");
+        requestDTO.setPassword("meta1234!");
+
+        // json 변환
+        String requestBody = om.writeValueAsString(requestDTO);
+
+        // eye
+        System.out.println("===============requestBody 시작===============");
+        System.out.println(getPrettyString(requestBody));
+        System.out.println("===============requestBody 종료===============");
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                post("/login")
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        // eye
+        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        System.out.println("===============responseBody 시작===============");
+        System.out.println(getPrettyString(responseBody));
+        System.out.println("===============responseBody 종료===============");
+
+        // then
+        resultActions.andExpect(status().isBadRequest()); // 400
+
+        // API
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
+    }
+
+    @Test
+    public void login_passwordSizeValidationFail_test() throws Exception {
+        // given
+        UserRequest.LoginDTO requestDTO = new UserRequest.LoginDTO();
+        requestDTO.setEmail("ssarmango@nate.com");
+        requestDTO.setPassword("meta1!");
+
+        // json 변환
+        String requestBody = om.writeValueAsString(requestDTO);
+
+        // eye
+        System.out.println("===============requestBody 시작===============");
+        System.out.println(getPrettyString(requestBody));
+        System.out.println("===============requestBody 종료===============");
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                post("/login")
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        // eye
+        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        System.out.println("===============responseBody 시작===============");
+        System.out.println(getPrettyString(responseBody));
+        System.out.println("===============responseBody 종료===============");
+
+        // then
+        resultActions.andExpect(status().isBadRequest()); // 400
+
+        // API
+        resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
+    }
+
+    @Test
+    public void login_passwordPatternValidationFail_test() throws Exception {
+        // given
+        UserRequest.LoginDTO requestDTO = new UserRequest.LoginDTO();
+        requestDTO.setEmail("ssarmango@nate.com");
+        requestDTO.setPassword("metameta");
+
+        // json 변환
+        String requestBody = om.writeValueAsString(requestDTO);
+
+        // eye
+        System.out.println("===============requestBody 시작===============");
+        System.out.println(getPrettyString(requestBody));
+        System.out.println("===============requestBody 종료===============");
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                post("/login")
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        // eye
+        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        System.out.println("===============responseBody 시작===============");
+        System.out.println(getPrettyString(responseBody));
+        System.out.println("===============responseBody 종료===============");
+
+        // then
+        resultActions.andExpect(status().isBadRequest()); // 400
 
         // API
         resultActions.andDo(MockMvcResultHandlers.print()).andDo(document);
